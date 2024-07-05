@@ -4,7 +4,6 @@ library(readr)
 banco_final <- read_csv("Banco de dados/banco_final.csv")
 View(banco_final)
 
-install.packages("tidyverse")
 library(tidyverse)
 
 
@@ -61,7 +60,7 @@ banco_final <- banco_final %>%
 banco_final$D_Estreia <- paste0(substr(banco_final$D_Estreia, 1,3), "0")
 banco_final$D_Estreia
 
-
+View(banco_final)
 ### gráfico
 
 banco_dados <- banco_final %>% 
@@ -69,11 +68,11 @@ banco_dados <- banco_final %>%
   summarise(frequência = n())
 view(banco_dados)
 
-ggplot(dados) +
-  aes(x = ano, y = preco, group = produto, colour = produto) +
+ggplot(banco_dados) +
+  aes(x = D_Estreia, y = frequência, group = Formato, colour = Formato) +
   geom_line(size = 1) +
   geom_point(size = 2) +
-  labs(x = "Ano", y = "Preço") +
+  labs(x = "Décadas", y = "Lançamentos") +
   theme_estat()
-#ggsave("series_grupo.pdf", width = 158, height = 93, units = "mm")
+ggsave("Lançamentos.pdf", width = 158, height = 93, units = "mm")
 
